@@ -1,11 +1,17 @@
-# app/db/mongo.py
-
+import os
 from pymongo import MongoClient
+from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
 
-MONGO_URI = "mongodb+srv://uk945867:12wq12wq@cluster0.fzv4m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+# Get Mongo credentials strictly from environment
+MONGO_URI = os.environ["MONGO_URI"]
+MONGO_DB = os.environ["MONGO_DB"]
+
+# Connect to database
 client = MongoClient(MONGO_URI)
+db = client[MONGO_DB]
 
-db = client["ecommerce_db"]
 product_collection = db["products"]
 order_collection = db["orders"]
